@@ -27,12 +27,21 @@ optionally handle upcoming notifications as well.</p>
 <button id="startNotifications" disabled>Start Notifications</button>
 <button id="stopNotifications" disabled>Stop Notifications</button>
 <button id="reset">Reset Bluetooth Device</button>
+<button id="imagedisp">Show Image</button>
+
+
+<p id="outputText"></p>
+<p id="texter"></p>
+<img id="driverl"</img>
 
 {% include output_helper.html %}
+
+<p id="texter"></p>
 
 {% include js_snippet.html filename='read-characteristic-value-changed.js' %}
 
 <script>
+ 
   document.querySelector('#readBatteryLevel').addEventListener('click', function() {
     if (isWebBluetoothEnabled()) {
       onReadBatteryLevelButtonClick();
@@ -57,6 +66,18 @@ optionally handle upcoming notifications as well.</p>
       onResetButtonClick();
     }
   });
+  
+    document.querySelector('#imagedisp').addEventListener('click', function(event) {
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onImageButtonClick();
+    }
+  });
+
+  
+  
+  
+  
 </script>
 
 {% include_relative _includes/utils.html %}

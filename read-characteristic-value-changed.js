@@ -1,6 +1,9 @@
 var bluetoothDevice;
 var batteryLevelCharacteristic;
 
+let stringOut = "";
+
+
 function onReadBatteryLevelButtonClick() {
   return (bluetoothDevice ? Promise.resolve() : requestDevice())
   .then(connectDeviceAndCacheCharacteristics)
@@ -43,7 +46,7 @@ function connectDeviceAndCacheCharacteristics() {
   .then(characteristic => {
     batteryLevelCharacteristic = characteristic;
     batteryLevelCharacteristic.addEventListener('characteristicvaluechanged',
-        handleBatteryLevelChanged);
+       handleBatteryLevelChanged);
     document.querySelector('#startNotifications').disabled = false;
     document.querySelector('#stopNotifications').disabled = true;
   });
@@ -54,7 +57,15 @@ function connectDeviceAndCacheCharacteristics() {
  * listener has been added. */
 function handleBatteryLevelChanged(event) {
   let batteryLevel = event.target.value.getUint8(0);
-  log('> Battery Level is ' + batteryLevel + '%');
+ // log('> Battery Level is ' + batteryLevel + '%');
+ // log(' ' + batteryLevel);
+   var textViewOut = document.getElementById('outputText'); //change to id of output.
+   let chr = String.fromCharCode(batteryLevel);
+    textViewOut.innerHTML += chr;
+    var driverImg= document.getElementById('driverl');
+    //driverl.src += chr;
+    stringOut +=chr; 
+   // log(' ' + chr);
 }
 
 function onStartNotificationsButtonClick() {
@@ -100,4 +111,12 @@ function onDisconnected() {
   .catch(error => {
     log('Argh! ' + error);
   });
+  }
+
+
+  function onImageButtonClick() {
+    var driverImg= document.getElementById('driverl');
+    stringOut = stringOut.substring(1, stringOut.length);
+    log(stringOut);
+    driverImg.src = stringOut; 
   }
