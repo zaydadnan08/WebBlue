@@ -57,15 +57,10 @@ function connectDeviceAndCacheCharacteristics() {
  * listener has been added. */
 function handleBatteryLevelChanged(event) {
   let batteryLevel = event.target.value.getUint8(0);
- // log('> Battery Level is ' + batteryLevel + '%');
- // log(' ' + batteryLevel);
-   var textViewOut = document.getElementById('outputText'); //change to id of output.
-   let chr = String.fromCharCode(batteryLevel);
-    textViewOut.innerHTML += chr;
-    var driverImg= document.getElementById('driverl');
-    //driverl.src += chr;
-    stringOut +=chr; 
-   // log(' ' + chr);
+   //var textViewOut = document.getElementById('outputText'); //change to id of output.
+   //textViewOut.innerHTML += chr;
+    //stringOut += String.fromCharCode(batteryLevel);
+    stringOut += (String.fromCharCode(batteryLevel));
 }
 
 function onStartNotificationsButtonClick() {
