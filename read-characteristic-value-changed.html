@@ -9,36 +9,27 @@ index: index.html
 
 {% include_relative _includes/intro.html %}
 
-<p>This sample illustrates the use of the Web Bluetooth API to read battery
-level and be notified of changes from a nearby Bluetooth Device advertising
-Battery information with Bluetooth Low Energy. You may want
-to try this demo with the BLE Peripheral
-Simulator App from the <a target="_blank"
-href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
-Play Store</a> and check out the <a
-href="read-characteristic-value-changed-async-await.html">Read Characteristic Value Changed
-Sample (Async Await)</a> sample.</p>
+<p>This sample illustrates the use of the Web Bluetooth API to read image
+b64 and be notified of changes from a nearby Bluetooth Device advertising
+Image information with Bluetooth Low Energy. Based off of the BLE battery service. 
 
 <p>Here, we use the <code>characteristicvaluechanged</code> event listener to
-handle reading battery level characteristic value. This event listener will
-optionally handle upcoming notifications as well.</p>
+handle reading image b64 characteristic value.</p>
 
-<button id="readBatteryLevel">Read Bluetooth Device's Battery Level</button>
-<button id="startNotifications" disabled>Start Notifications</button>
-<button id="stopNotifications" disabled>Stop Notifications</button>
+<button id="readBatteryLevel">Connect to Device</button>
+<button id="startNotifications" disabled>Enable Notifications</button>
+<button id="stopNotifications" disabled>Disable Notifications</button>
 <button id="reset">Reset Bluetooth Device</button>
 <button id="imagedisp">Show Image</button>
 
-
-<p id="outputText"></p>
-<p id="texter"></p>
-<img id="driverl"</img>
-
 {% include output_helper.html %}
 
-<p id="texter"></p>
+<img id="driverl"</img>
 
 {% include js_snippet.html filename='read-characteristic-value-changed.js' %}
+
+<p id="texter"></p>
+
 
 <script>
  
@@ -74,9 +65,6 @@ optionally handle upcoming notifications as well.</p>
     }
   });
 
-  
-  
-  
   
 </script>
 

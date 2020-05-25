@@ -7,10 +7,10 @@ let stringOut = "";
 function onReadBatteryLevelButtonClick() {
   return (bluetoothDevice ? Promise.resolve() : requestDevice())
   .then(connectDeviceAndCacheCharacteristics)
-  .then(_ => {
-    log('Reading Battery Level...');
-    return batteryLevelCharacteristic.readValue();
-  })
+ // .then(_ => {
+ //   log('Reading Battery Level...');
+ //   return batteryLevelCharacteristic.readValue();
+ // })
   .catch(error => {
     log('Argh! ' + error);
   });
@@ -36,11 +36,11 @@ function connectDeviceAndCacheCharacteristics() {
   log('Connecting to GATT Server...');
   return bluetoothDevice.gatt.connect()
   .then(server => {
-    log('Getting Battery Service...');
+    log('Getting Service...');
     return server.getPrimaryService('battery_service');
   })
   .then(service => {
-    log('Getting Battery Level Characteristic...');
+    log('Getting Characteristic...');
     return service.getCharacteristic('battery_level');
   })
   .then(characteristic => {
@@ -57,14 +57,11 @@ function connectDeviceAndCacheCharacteristics() {
  * listener has been added. */
 function handleBatteryLevelChanged(event) {
   let batteryLevel = event.target.value.getUint8(0);
-   //var textViewOut = document.getElementById('outputText'); //change to id of output.
-   //textViewOut.innerHTML += chr;
-    //stringOut += String.fromCharCode(batteryLevel);
     stringOut += (String.fromCharCode(batteryLevel));
 }
 
 function onStartNotificationsButtonClick() {
-  log('Starting Battery Level Notifications...');
+  log('Starting Notifications...');
   batteryLevelCharacteristic.startNotifications()
   .then(_ => {
     log('> Notifications started');
@@ -77,7 +74,7 @@ function onStartNotificationsButtonClick() {
 }
 
 function onStopNotificationsButtonClick() {
-  log('Stopping Battery Level Notifications...');
+  log('Stopping Notifications...');
   batteryLevelCharacteristic.stopNotifications()
   .then(_ => {
     log('> Notifications stopped');
@@ -111,7 +108,7 @@ function onDisconnected() {
 
   function onImageButtonClick() {
     var driverImg= document.getElementById('driverl');
-    stringOut = stringOut.substring(1, stringOut.length);
     log(stringOut);
     driverImg.src = stringOut; 
+    stringOut = ""; 
   }
